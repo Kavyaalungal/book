@@ -1,6 +1,6 @@
 import "./Navigation.css"
 import { Link } from "react-router-dom";
-
+import Register from "./Register";
 
 function Navigation(){
     return(
@@ -19,14 +19,11 @@ function Navigation(){
       <p>Location</p>
       {/* <input type="submit" value="Register"> */}
       {/* <button><a href="register.html"></a>Register</button> */}
-     <button>
-        <a
-          className="btn"
-          style={{ textDecoration: "none" }}
-        >
-          Register
-        </a>
-      </button>
+      
+      <button className="btn">
+  <Link to="/register">Register</Link>
+</button>
+
       <i className="fa-solid fa-bars" />
     </div>
   </nav>
