@@ -16,13 +16,18 @@ function Navigation(){
       />
     </div>
     <div className="right">
-      <p>Location</p>
+    <button className="btn">
+  <Link to="/home">Home</Link>
+</button>
+
+      {/* <p>Location</p> */}
       {/* <input type="submit" value="Register"> */}
       {/* <button><a href="register.html"></a>Register</button> */}
       
       <button className="btn">
   <Link to="/register">Register</Link>
 </button>
+
 
       <i className="fa-solid fa-bars" />
     </div>
