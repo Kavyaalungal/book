@@ -22,25 +22,60 @@ export async function register(req, res) {
 }
 
 
+import multer from 'multer';
 
-export async function uploadFile(req,res){
-    try {
-        let {Mname,data,myfile}=req.body
-        
-        let result=await fileSchema.create({
-            Mname,
-            data,
-            myfile
-        })
-        if(result){
-            return res.json("Data successfully uploaded")
-        }
-        return res.status(500).send ("error occured")
-    } catch (error) {
-        console.log(error)
-        return res.status(500).send("error occured")
-    }
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
+
+export async function uploadFile(req, res) {
+  try {
+    upload.single('myfile')(req, res, async (err) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).send('Error occurred');
+      }
+
+      const { Mname, data } = req.body;
+      const myfile = req.file.buffer.toString('base64');
+
+      let result = await fileSchema.create({
+        Mname,
+        data,
+        myfile,
+      });
+
+      if (result) {
+        return res.json('Data successfully uploaded');
+      }
+
+      return res.status(500).send('Error occurred');
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send('Error occurred');
+  }
 }
+
+
+
+// export async function uploadFile(req,res){
+//     try {
+//         let {Mname,data,myfile}=req.body
+        
+//         let result=await fileSchema.create({
+//             Mname,
+//             data,
+//             myfile
+//         })
+//         if(result){
+//             return res.json("Data successfully uploaded")
+//         }
+//         return res.status(500).send ("error occured")
+//     } catch (error) {
+//         console.log(error)
+//         return res.status(500).send("error occured")
+//     }
+// }
 
 
 export async function  getfile(req,res){
@@ -53,19 +88,35 @@ export async function  getfile(req,res){
     }
 }
 
-export async function  getmovie(req,res){
-    try{
-        let {id}=req.query;
-        let result=await fileSchema.find({_id:id});
-        console.log(result)
-        if(result.length > 0){
-            return res.status(200).send(result)
+// export async function  getmovie(req,res){
+//     try{
+//         let {id}=req.query;
+//         let result=await fileSchema.find({_id:id});
+//         console.log(result)
+//         if(result.length > 0){
+//             return res.status(200).send(result)
 
-        }
-        return res.status(200).send({msg:"There is no details"})
+//         }
+//         return res.status(200).send({msg:"There is no details"})
+//     }
+//     catch(error){
+//         console.log(error)
+//         return res.status(500).send("Error occured")
+//     }
+// }
+export async function getmovie(req, res) {
+    try {
+      let { id } = req.params; // Change from req.query.id to req.params.id
+      let result = await fileSchema.find({ _id: id });
+  
+      if (result.length > 0) {
+        return res.status(200).send(result);
+      }
+  
+      return res.status(200).send({ msg: 'There is no details' });
+    } catch (error) {
+      console.log(error);
+      return res.status(500).send('Error occurred');
     }
-    catch(error){
-        console.log(error)
-        return res.status(500).send("Error occured")
-    }
-}
+  }
+  

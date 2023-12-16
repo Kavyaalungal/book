@@ -49,9 +49,9 @@ function Navigation(){
       <p>Gift Cards</p>
     </div>
   </nav>
-  <div className="main">
+  {/* <div className="main">
     <img src="./src/images/main.avif" alt="" />
-  </div>
+  </div> */}
         </>
     )
 

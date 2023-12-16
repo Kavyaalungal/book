@@ -1,5 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
+import cors from "cors";
 
 import conn from "./connection.js";
 import router from "./router.js";
@@ -7,6 +8,7 @@ import router from "./router.js";
 dotenv.config();
 
 const app = express();
+app.use(cors())
 
 app.use("/", express.static("./static"));
 app.use(express.json());

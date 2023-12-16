@@ -1,13 +1,20 @@
-import mongoose from "mongoose"     
-const schema=new mongoose.Schema({   //create schema structure
-    Mname:{
-        type:String
+import mongoose from "mongoose";
+
+
+const schema = new mongoose.Schema({
+    Mname: {
+      type: String,
+      required: true,
     },
-    data:{
-        type:String
+    data: {
+      type: String,
+      required: true,
     },
-    myfile:{
-        type:String
-    }
-})
-export default mongoose.file||  mongoose.model("files",schema);   
+    myfile: {
+      type: Buffer, 
+      required: true,
+    },
+  });
+  
+  export default mongoose.model('files', schema);
+  
