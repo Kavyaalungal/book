@@ -55,7 +55,7 @@
 //         <img src="./src/images/premiere2.avif" alt="" />
 //         <img src="./src/images/premiere3.avif" alt="" />
 //         <img src="./src/images/premiere4.avif" alt="" />
-//         <img src="./src/images/premiere5.avif" alt="" />
+//         <img src="./src/images/premiere5.avif" altPassword="" />
 //       </div>
 //     </div>
 //   </div>
@@ -76,6 +76,7 @@
 
 
 import React, { useState, useEffect } from "react";
+import '@fortawesome/fontawesome-free/css/all.css';
 import axios from "axios";
 import "./Navigation.css";
 
